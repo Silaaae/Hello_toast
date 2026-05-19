@@ -1,5 +1,5 @@
-# Hello_toast
-non ecris juste ici17:25Claude responded: L'application HelloToast a été développée dans le cadre d'un TP Android avec Android Studio.L'application HelloToast a été développée dans le cadre d'un TP Android avec Android Studio. L'objectif était de créer une application simple comportant deux boutons : un affichant un message Toast et un autre incrémentant un compteur à l'écran.
+: L'application HelloToast a été développée dans le cadre d'un TP Android avec Android Studio.
+L'application HelloToast a été développée dans le cadre d'un TP Android avec Android Studio. L'objectif était de créer une application simple comportant deux boutons : un affichant un message Toast et un autre incrémentant un compteur à l'écran.
 Étape 1 — Création du projet
 Le projet a été créé dans Android Studio en sélectionnant New Project → Empty Activity, avec le nom HelloToast, le langage Java et une API minimum de 24 (Android 7.0).
 Étape 2 — Interface XML
