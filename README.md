@@ -1,13 +1,95 @@
-: L'application HelloToast a été développée dans le cadre d'un TP Android avec Android Studio.
-L'application HelloToast a été développée dans le cadre d'un TP Android avec Android Studio. L'objectif était de créer une application simple comportant deux boutons : un affichant un message Toast et un autre incrémentant un compteur à l'écran.
+Rapport de TP — Application Android HelloToast
+
+Informations générales
+
+Nom : NISRINE
+Date : 19 mai 2026
+IDE : Android Studio
+Langage : Java
+API minimum : 24 (Android 7.0)
+Émulateur : MobSF_DIVA_API_30 (Android 11)
+Dépôt GitHub : https://github.com/Silaaae/Hello_toast
+
+
+Objectif
+Créer une application Android simple comportant deux boutons : l'un affiche un message Toast, l'autre incrémente un compteur affiché à l'écran.
+
 Étape 1 — Création du projet
-Le projet a été créé dans Android Studio en sélectionnant New Project → Empty Activity, avec le nom HelloToast, le langage Java et une API minimum de 24 (Android 7.0).
-Étape 2 — Interface XML
-Le fichier activity_main.xml a été configuré avec un LinearLayout vertical centré contenant un TextView pour le compteur et deux Button. Une erreur de compilation a été rencontrée : le namespace xmlns:android était absent de la balise racine, provoquant un ParseError. Les attributs layout_width et layout_height manquaient également sur chaque composant. Ces deux points ont été corrigés.
-Étape 3 — Logique Java
-Le fichier MainActivity.java présentait 21 erreurs dues à des imports manquants et à l'absence de la déclaration de package. Après correction, les deux boutons ont été reliés à leurs actions via setOnClickListener : le premier appelle Toast.makeText() et le second incrémente une variable count puis met à jour le TextView via setText().
+Ouverture d'Android Studio, sélection de New Project → Empty Activity. Nom du projet : HelloToast, langage Java, API minimum 24.
+
+Étape 2 — Interface (activity_main.xml)
+xml<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/text_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="36sp"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/button_toast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Afficher un message"
+        android:layout_marginBottom="12dp" />
+
+    <Button
+        android:id="@+id/button_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Incrémenter le compteur" />
+
+</LinearLayout>
+
+Étape 3 — Logique Java (MainActivity.java)
+javapackage com.example.hello_toastt;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private int count = 0;
+    private TextView textCount;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        textCount = findViewById(R.id.text_count);
+        Button buttonToast = findViewById(R.id.button_toast);
+        Button buttonCount = findViewById(R.id.button_count);
+
+        buttonToast.setOnClickListener(v -> {
+            Toast.makeText(this, "Bonjour !", Toast.LENGTH_SHORT).show();
+        });
+
+        buttonCount.setOnClickListener(v -> {
+            count++;
+            textCount.setText(String.valueOf(count));
+        });
+    }
+}
+
 Problèmes rencontrés
-L'émulateur MobSF_DIVA_API_30 était bloqué en tant que processus Windows (PID 28544). La commande kill -9 ne fonctionnant pas sous PowerShell, la solution a été Stop-Process -Id 28544 -Force suivi de la suppression du fichier .lock de l'AVD.
+
+21 erreurs Java — imports et déclaration de package manquants. Corrigé en ajoutant le package et tous les imports nécessaires.
+ParseError XML — namespace xmlns:android absent de la balise racine, et attributs layout_width / layout_height manquants sur chaque composant. Corrigé en restructurant le fichier XML.
+Émulateur bloqué (PID 28544) — la commande kill -9 ne fonctionne pas sous PowerShell. Corrigé avec Stop-Process -Id 28544 -Force puis suppression du fichier .lock.
+
+
 Résultat
-L'application fonctionne correctement sur l'émulateur Android 11. Le bouton TOAST affiche le message "Bonjour !" et le bouton COUNT incrémente le compteur affiché à l'écran.
+L'application fonctionne correctement sur l'émulateur Android 11. Le bouton TOAST affiche "Bonjour !" et le bouton COUNT incrémente le compteur affiché à l'écran. Le code source a été poussé sur GitHub avec succès.
 <img width="276" height="570" alt="image" src="https://github.com/user-attachments/assets/80e8bf15-e554-4499-ad7f-def75ad974e2" />
